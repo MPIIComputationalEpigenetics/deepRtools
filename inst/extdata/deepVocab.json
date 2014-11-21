@@ -1,0 +1,81 @@
+{
+	"DEEP": {
+		"ORGAN":{
+			"Bl": "blood",
+			"Co": "colon",
+			"Il": "ileum",
+			"In": "intestine",
+			"LP": "lamina propria",
+			"Li": "liver",
+			"SF": "synovial fluid",
+			"WE": "white adipose tissue (epididymal)",
+			"WS": "white adipose tissue (subcutaneous)",
+			"WM": "white adipose tissue (mesenteric)",
+			"Br": "brown adipose tissue",
+			"Bm": "bone marrow"
+		},
+		"CELL_TYPE":{
+			"Ad": "adipocyte",
+			"CM": "central memory CD4+",
+			"EM": "effector memory CD4+",
+			"Ec": "epithelial cell",
+			"Fi": "fibroblast",
+			"He": "hepatocyte",
+			"Ku": "Kupffer cell",
+			"Ma": "macrophage",
+			"Mo": "monocyte",
+			"Mu": "mucosa",
+			"PM": "protective memory CD4+",
+			"Th": "CD4+ T helper cell"
+		},
+		"DISEASE":{
+			"Ct": "control",
+			"CD": "Crohn's disease",
+			"C0": "Circadian rhythm 0",
+			"C1": "Circadian rhythm 1",
+			"C2": "Circadian rhythm 2",
+			"C3": "Circadian rhythm 3",
+			"C4": "Circadian rhythm 4",
+			"C5": "Circadian rhythm 5",
+			"C6": "Circadian rhythm 6",
+			"C7": "Circadian rhythm 7",
+			"C8": "Circadian rhythm 8",
+			"C9": "Circadian rhythm 9",
+			"OA": "osteoarthritis",
+			"OC": "stochastic obesity (control)",
+			"OL": "stochastic obesity (lean)",
+			"OO": "stochastic obesity (obese)",
+			"RA": "rheumatoid arthritis",
+			"Sh": "steatohepatitis",
+			"Si": "induced steatosis",
+			"SK": "steatohepatitis, Kupffer cell depleted",
+			"St": "steatosis",
+			"Tr": "treated",
+			"TO": "loaded (oxLDL)",
+			"TE": "loaded (eLDL)"
+		},
+		"ASSAY":{
+			"WGBS": "whole genome bisulfite sequencing",
+			"mRNA": "stranded mRNA sequencing",
+			"tRNA": "stranded total RNA sequencing",
+			"SNRNA": "small non-coding RNA sequencing",
+			"NOME": "NOMe sequencing",
+			"DNASE": "DNaseI sequencing",
+			"INPUT": "ChIP sequencing (input)",
+			"H3K4me3": "ChIP sequencing (H3K4me3)",
+			"H3K4me1": "ChIP sequencing (H3K4me1)",
+			"H3K9me3": "ChIP sequencing (H3K9me3)",
+			"H3K27me3": "ChIP sequencing (H3K27me3)",
+			"H3K27ac": "ChIP sequencing (H3K27ac)",
+			"H3K36me3": "ChIP sequencing (H3K36me3)"
+		},
+		"CENTER":{
+			"B": "Max Planck Institute for Molecular Genetics, Berlin",
+			"E": "University of Duisburg-Essen, Essen",
+			"F": "Max Planck Institute for Immunobiology and Epigenetics, Freiburg",
+			"K": "Christian-Albrechts University, Kiel",
+			"M": "Max Delbrueck Center for Molecular Medicine, Berlin",
+			"S": "Saarland University, Saarbruecken"
+		}
+	}
+}

@@ -1,0 +1,14 @@
+Package: deepRtools
+Title: DEEP R tools
+Description: R tools for the German epigenome program DEEP (DEutsches Epigenom
+    Programm)
+Author: Fabian Mueller
+Maintainer: Fabian Mueller <fmueller@mpi-inf.mpg.de>
+Date: 2014-11-21
+Suggests:
+    GenomicRanges
+Depends:
+    jsonlite,
+    ggplot2
+License: GPL-2
+Version: 0.1
