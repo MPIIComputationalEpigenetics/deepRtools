@@ -17,7 +17,7 @@ REGEX_DEEP_SAMPLE_PREFIX <- paste0(
 REGEX_DEEP_SAMPLE_SUFFIX <- paste0(
 	"(?P<assay>",paste(names(DEEP_ASSAYS),collapse="|"),")_",
 	"(?P<center>",paste(names(DEEP_CENTERS),collapse="|"),")",
-	"_(?P<treplicate>[1-9])",
+	"_(?P<treplicate>[1-9])"
 )
 REGEX_DEEP_SAMPLE_ID <- paste0("^",REGEX_DEEP_SAMPLE_PREFIX,"$")
 REGEX_DEEP_SAMPLE_ID_FULL <- paste0("^",REGEX_DEEP_SAMPLE_PREFIX,"_",REGEX_DEEP_SAMPLE_SUFFIX,"$")
@@ -65,9 +65,10 @@ deepSampleIds2dataFrame <- function(ids){
 			organ=NA,
 			cellType=NA,
 			disease=NA,
-			replicate=NA,
+			breplicate=NA,
 			assay=NA,
-			center=NA
+			center=NA,
+			treplicate=NA
 		)
 		if (!is.na(re)){
 			rem <- regexpr(re,x,perl=TRUE)
