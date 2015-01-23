@@ -9,14 +9,15 @@ DEEP_CENTERS <- unlist(getDeepVocab()[["DEEP"]][["CENTER"]])
 
 
 REGEX_DEEP_SAMPLE_PREFIX <- paste0(
-	"(?P<sp>[45][1-4])_",
+	"(?P<sp>([45][1-4]|0[01]))_",
 	"(?P<organism>[HM])(?P<sex>[mf])(?P<donor>[0-9]{2})_",
 	"(?P<organ>",paste(names(DEEP_ORGANS),collapse="|"),")","(?P<celltype>",paste(names(DEEP_CELL_TYPES),collapse="|"),")_",
 	"(?P<disease>",paste(names(DEEP_DISEASES),collapse="|"),")(?P<replicate>[0-9]?)"
 )
 REGEX_DEEP_SAMPLE_SUFFIX <- paste0(
 	"(?P<assay>",paste(names(DEEP_ASSAYS),collapse="|"),")_",
-	"(?P<center>",paste(names(DEEP_CENTERS),collapse="|"),")"
+	"(?P<center>",paste(names(DEEP_CENTERS),collapse="|"),")",
+	"(_(?P<treplicate>[1-9]))?",
 )
 REGEX_DEEP_SAMPLE_ID <- paste0("^",REGEX_DEEP_SAMPLE_PREFIX,"$")
 REGEX_DEEP_SAMPLE_ID_FULL <- paste0("^",REGEX_DEEP_SAMPLE_PREFIX,"_",REGEX_DEEP_SAMPLE_SUFFIX,"$")
