@@ -12,7 +12,7 @@ REGEX_DEEP_SAMPLE_PREFIX <- paste0(
 	"(?P<sp>([45][1-4]|0[01]))_",
 	"(?P<organism>[HM])(?P<sex>[mf])(?P<donor>[0-9]{2})_",
 	"(?P<organ>",paste(names(DEEP_ORGANS),collapse="|"),")","(?P<celltype>",paste(names(DEEP_CELL_TYPES),collapse="|"),")_",
-	"(?P<disease>",paste(names(DEEP_DISEASES),collapse="|"),")(?P<replicate>[0-9]?)"
+	"(?P<disease>",paste(names(DEEP_DISEASES),collapse="|"),")(?P<breplicate>[0-9]?)"
 )
 REGEX_DEEP_SAMPLE_SUFFIX <- paste0(
 	"(?P<assay>",paste(names(DEEP_ASSAYS),collapse="|"),")_",
@@ -80,11 +80,12 @@ deepSampleIds2dataFrame <- function(ids){
 			df[["organ"]] <- DEEP_ORGANS[parsed[1,"organ"]]
 			df[["cellType"]] <- DEEP_CELL_TYPES[parsed[1,"celltype"]]
 			df[["disease"]] <- DEEP_DISEASES[parsed[1,"disease"]]
-			if (nchar(parsed[1,"replicate"])>0) df[["replicate"]] <- parsed[1,"replicate"]
+			if (nchar(parsed[1,"breplicate"])>0) df[["breplicate"]] <- parsed[1,"breplicate"]
 		}
 		if (fullId){
 			df[["assay"]] <- DEEP_ASSAYS[parsed[1,"assay"]]
 			df[["center"]] <- DEEP_CENTERS[parsed[1,"center"]]
+			if (nchar(parsed[1,"treplicate"])>0) df[["treplicate"]] <- parsed[1,"treplicate"]
 		}
 		return(df)
 	}))
