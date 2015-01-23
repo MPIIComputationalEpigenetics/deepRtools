@@ -30,7 +30,7 @@
 			"NP": "non-parenchymal cell",
 			"Th": "CD4+ T helper cell",
 			"Tn": "naive T cells",
-			"Ti": "whole tissue",
+			"Ti": "whole tissue"
 		},
 		"DISEASE":{
 			"Ct": "control",
