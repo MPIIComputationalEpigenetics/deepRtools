@@ -22,6 +22,8 @@
 			"Fi": "fibroblast",
 			"He": "hepatocyte",
 			"HR": "HepaRG",
+			"HG": "HepG2",
+			"Mc": "MCF10A",
 			"Ku": "Kupffer cell",
 			"Ma": "macrophage",
 			"Mo": "monocyte",
@@ -29,7 +31,7 @@
 			"PM": "protective memory CD4+",
 			"NP": "non-parenchymal cell",
 			"Th": "CD4+ T helper cell",
-			"Tn": "naive T cells",
+			"TN": "naive T cells",
 			"Ti": "whole tissue"
 		},
 		"DISEASE":{
@@ -114,6 +116,23 @@
 			"S": "Saarland University, Saarbruecken",
 			"I": "IHEC (external download)",
 			"R": "Broad Institute (external download)"
+		},
+		"CELL_LINE":{
+			"HepaRG":{
+				"name":     "HepaRG",
+				"organism": "human",
+				"sex":      "female"
+			},
+			"HepG2":{
+				"name":     "HepG2",
+				"organism": "human",
+				"sex":      "male"
+			},
+			"MCF10A":{
+				"name":     "MCF10A",
+				"organism": "human",
+				"sex":      "female"
+			}
 		}
 	}
 }

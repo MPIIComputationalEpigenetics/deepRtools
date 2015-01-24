@@ -6,11 +6,12 @@ DEEP_CELL_TYPES <- unlist(getDeepVocab()[["DEEP"]][["CELL_TYPE"]])
 DEEP_DISEASES <- unlist(getDeepVocab()[["DEEP"]][["DISEASE"]])
 DEEP_ASSAYS <- unlist(getDeepVocab()[["DEEP"]][["ASSAY"]])
 DEEP_CENTERS <- unlist(getDeepVocab()[["DEEP"]][["CENTER"]])
+DEEP_CELL_LINES <- getDeepVocab()[["DEEP"]][["CELL_LINE"]]
 
 
 REGEX_DEEP_SAMPLE_PREFIX <- paste0(
 	"(?P<sp>([45][1-4]|0[01]))_",
-	"(?P<organism>[HM])(?P<sex>[mf])(?P<donor>[0-9]{2})_",
+	"((?P<organism>[HM])(?P<sex>[mf])(?P<donor>[0-9]{2})|(?P<cellline>",paste(names(DEEP_CELL_LINES),collapse="|"),"))_",
 	"(?P<organ>",paste(names(DEEP_ORGANS),collapse="|"),")","(?P<celltype>",paste(names(DEEP_CELL_TYPES),collapse="|"),")_",
 	"(?P<disease>",paste(names(DEEP_DISEASES),collapse="|"),")(?P<breplicate>[0-9]?)"
 )
@@ -58,6 +59,7 @@ deepSampleIds2dataFrame <- function(ids){
 		df <- data.frame(
 			id=x,
 			validId=FALSE,
+			isCellLine=FALSE,
 			subproject=NA,
 			organism=NA,
 			sex=NA,
@@ -73,15 +75,23 @@ deepSampleIds2dataFrame <- function(ids){
 		if (!is.na(re)){
 			rem <- regexpr(re,x,perl=TRUE)
 			parsed <- parse.one(x,rem)
+			
 			df[["validId"]] <- TRUE
 			df[["subproject"]] <- paste0("SP",paste(strsplit(parsed[1,"sp"],"")[[1]],collapse="."))
 			df[["organism"]]   <- ifelse(parsed[1,"organism"]=="H","human",ifelse(parsed[1,"organism"]=="M","mouse",NA))
 			df[["sex"]]   <- ifelse(parsed[1,"sex"]=="m","male",ifelse(parsed[1,"sex"]=="f","female",NA))
-			df[["donor"]] <- parsed[1,"donor"]
+			if (nchar(parsed[1,"donor"])>0) df[["donor"]] <- parsed[1,"donor"]
 			df[["organ"]] <- DEEP_ORGANS[parsed[1,"organ"]]
 			df[["cellType"]] <- DEEP_CELL_TYPES[parsed[1,"celltype"]]
 			df[["disease"]] <- DEEP_DISEASES[parsed[1,"disease"]]
 			if (nchar(parsed[1,"breplicate"])>0) df[["breplicate"]] <- parsed[1,"breplicate"]
+
+			cln <- parsed[1,"cellline"]
+			if (nchar(cln)>0) {
+				df[["isCellLine"]] <- TRUE
+				df[["organism"]] <- DEEP_CELL_LINES[[cln]]$organism
+				df[["sex"]] <- DEEP_CELL_LINES[[cln]]$sex
+			}
 		}
 		if (fullId){
 			df[["assay"]] <- DEEP_ASSAYS[parsed[1,"assay"]]
