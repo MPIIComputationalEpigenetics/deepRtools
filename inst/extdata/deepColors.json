@@ -12,6 +12,15 @@
 			"input"    : "#525252",
 			"other"    : "#252525"
 		},
-		"CATEGORY_BDE": ["#2166AC","#B2182B","#1B9E77","#D95F02","#7570B3","#E7298A","#66A61E","#E6AB02","#A6761D","#666666","#00441B","#40004B","#053061"]
+		"DNASE": "#01665E",
+		"METHYLATION_GRADIENT": ["#EDF8B1","#41B6C4","#081D58"],
+		"CATEGORY_BDE": ["#2166AC","#B2182B","#1B9E77","#D95F02","#7570B3","#E7298A","#66A61E","#E6AB02","#A6761D","#666666","#00441B","#40004B","#053061"],
+		"CORPORATE_COLORS": {
+			"deep_turquois" : "#018D9D",
+			"deep_grey"     : "#C6C6C6",
+			"mpii_darkblue" : "#1C1D3B",
+			"mpii_lightblue": "#676D8D",
+			"mpii_grey"     : "#C6C6B6"
+		}
 	}
 }

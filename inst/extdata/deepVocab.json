@@ -30,6 +30,7 @@
 			"Mu": "mucosa",
 			"PM": "protective memory CD4+",
 			"NP": "non-parenchymal cell",
+			"TA": "effector memory CD4+, TEMRA",
 			"Th": "CD4+ T helper cell",
 			"TN": "naive T cells",
 			"Ti": "whole tissue"
