@@ -133,6 +133,10 @@
 				"name":     "MCF10A",
 				"organism": "human",
 				"sex":      "female"
+			},
+			"3T3L1":{
+				"name":     "3T3-L1",
+				"organism": "mouse"
 			}
 		}
 	}
