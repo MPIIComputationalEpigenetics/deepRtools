@@ -102,4 +102,16 @@ deepSampleIds2dataFrame <- function(ids){
 	}))
 	return(res)
 }
-
+#' deepSampleBaseIds
+#' 
+#' parses a vector of sample IDs and returns avector with the base ids (without assay, center and technical replicate fields). Returns the same string if it is not a valid ID.
+#' @param ids a vector of sample ids as strings
+#' @return a vector of sample ids as strings
+#' @author Fabian Mueller
+#' @export 
+#' @examples 
+#' deepSampleBaseIds(c("43_Hm03_BlMa_TO1_WGBS_E_1","43_Hm05_BlMa_Ct","43_Hm05_BlMa_Ct_NOMe_S_2","01_HepaRG_LiHR_D32","41_Hf01_LiHe_Ct1_H3K4me1_F_1"))
+deepSampleBaseIds <- function(ids){
+	res <- gsub(paste0("(",REGEX_DEEP_SAMPLE_PREFIX,")","(_",REGEX_DEEP_SAMPLE_SUFFIX,")?"),"\\1",ids, perl=TRUE)
+	return(res)
+}
