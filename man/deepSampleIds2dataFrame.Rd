@@ -16,7 +16,7 @@ A dataframe with columns corresponding to the fields that can be inferred from t
 parses a vector of sample IDs and returns avector with the corresponding fields
 }
 \examples{
-deepSampleIds2dataFrame(c("43_Hm03_BlMa_TO1_WGBS_E_1","43_Hm05_BlMa_Ct","43_Hm05_BlMa_Ct_NOMe_S_2","01_HepaRG_LiHR_D32","41_Hf01_LiHe_Ct1_H3K4me1_F_1"))
+deepSampleIds2dataFrame(c("43_Hm03_BlMa_TO1_WGBS_E_1", "43_Hm03_BlMa_TO1_WGBS","43_Hm05_BlMa_Ct","43_Hm05_BlMa_Ct_NOMe_S_2","01_HepaRG_LiHR_D32","41_Hf01_LiHe_Ct1_H3K4me1_F_1"))
 }
 \author{
 Fabian Mueller
