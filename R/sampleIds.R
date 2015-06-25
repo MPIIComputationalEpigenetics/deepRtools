@@ -16,9 +16,9 @@ REGEX_DEEP_SAMPLE_PREFIX <- paste0(
 	"(?P<disease>",paste(names(DEEP_DISEASES),collapse="|"),")(?P<breplicate>[0-9]?)"
 )
 REGEX_DEEP_SAMPLE_SUFFIX <- paste0(
-	"(?P<assay>",paste(names(DEEP_ASSAYS),collapse="|"),")_",
+	"(?P<assay>",paste(names(DEEP_ASSAYS),collapse="|"),")(_",
 	"(?P<center>",paste(names(DEEP_CENTERS),collapse="|"),")",
-	"_(?P<treplicate>[1-9])"
+	"(_(?P<treplicate>[1-9]))?)?"
 )
 REGEX_DEEP_SAMPLE_ID <- paste0("^",REGEX_DEEP_SAMPLE_PREFIX,"$")
 REGEX_DEEP_SAMPLE_ID_FULL <- paste0("^",REGEX_DEEP_SAMPLE_PREFIX,"_",REGEX_DEEP_SAMPLE_SUFFIX,"$")
@@ -46,7 +46,7 @@ parse.one <- function(string,result){
 #' @author Fabian Mueller
 #' @export 
 #' @examples 
-#' deepSampleIds2dataFrame(c("43_Hm03_BlMa_TO1_WGBS_E_1","43_Hm05_BlMa_Ct","43_Hm05_BlMa_Ct_NOMe_S_2","01_HepaRG_LiHR_D32","41_Hf01_LiHe_Ct1_H3K4me1_F_1"))
+#' deepSampleIds2dataFrame(c("43_Hm03_BlMa_TO1_WGBS_E_1", "43_Hm03_BlMa_TO1_WGBS","43_Hm05_BlMa_Ct","43_Hm05_BlMa_Ct_NOMe_S_2","01_HepaRG_LiHR_D32","41_Hf01_LiHe_Ct1_H3K4me1_F_1"))
 deepSampleIds2dataFrame <- function(ids){
 	res <- do.call("rbind",lapply(ids,FUN=function(x){
 		re <- NA
@@ -96,7 +96,8 @@ deepSampleIds2dataFrame <- function(ids){
 		if (fullId){
 			df[["assay"]] <- DEEP_ASSAYS[parsed[1,"assay"]]
 			df[["center"]] <- DEEP_CENTERS[parsed[1,"center"]]
-			df[["treplicate"]] <- parsed[1,"treplicate"]
+			trep <- parsed[1,"treplicate"]
+			if (nchar(trep)>0) df[["treplicate"]] <- trep
 		}
 		return(df)
 	}))
