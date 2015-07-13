@@ -27,7 +27,7 @@ getSampleMdFromFile <- function(fn, lenient=FALSE){
 	missingFields <- setdiff(requiredFields, presentFields)
 	additionalFields <- setdiff(presentFields, requiredFields)
 	if (length(missingFields)>0){
-		msg <- paste0("Missing fields in experiment metadata: ",paste(missingFields,collapse=","))
+		msg <- paste0("Missing fields in sample metadata: ",paste(missingFields,collapse=","))
 		if (lenient){
 			warning(msg)
 		} else {
