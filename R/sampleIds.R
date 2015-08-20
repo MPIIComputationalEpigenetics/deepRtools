@@ -11,7 +11,7 @@ DEEP_CELL_LINES <- getDeepVocab()[["DEEP"]][["CELL_LINE"]]
 
 REGEX_DEEP_SAMPLE_PREFIX <- paste0(
 	"(?P<sp>([45][1-4]|0[01]))_",
-	"((?P<organism>[HM])(?P<sex>[mf])(?P<donor>[0-9]{2})|(?P<cellline>",paste(names(DEEP_CELL_LINES),collapse="|"),"))_",
+	"((?P<organism>[HM])(?P<sex>[mf])(?P<donor>[0-9a-z]{2})|(?P<cellline>",paste(names(DEEP_CELL_LINES),collapse="|"),"))_",
 	"(?P<organ>",paste(names(DEEP_ORGANS),collapse="|"),")","(?P<celltype>",paste(names(DEEP_CELL_TYPES),collapse="|"),")_",
 	"(?P<disease>",paste(names(DEEP_DISEASES),collapse="|"),")(?P<breplicate>[0-9]?)"
 )
