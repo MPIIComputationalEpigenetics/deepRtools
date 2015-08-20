@@ -105,7 +105,7 @@ deepSampleIds2dataFrame <- function(ids){
 }
 #' deepSampleBaseIds
 #' 
-#' parses a vector of sample IDs and returns avector with the base ids (without assay, center and technical replicate fields). Returns the same string if it is not a valid ID.
+#' parses a vector of sample IDs and returns a vector with the base ids (without assay, center and technical replicate fields). Returns the same string if it is not a valid ID.
 #' @param ids a vector of sample ids as strings
 #' @return a vector of sample ids as strings
 #' @author Fabian Mueller
@@ -114,5 +114,19 @@ deepSampleIds2dataFrame <- function(ids){
 #' deepSampleBaseIds(c("43_Hm03_BlMa_TO1_WGBS_E_1","43_Hm05_BlMa_Ct","43_Hm05_BlMa_Ct_NOMe_S_2","01_HepaRG_LiHR_D32","41_Hf01_LiHe_Ct1_H3K4me1_F_1"))
 deepSampleBaseIds <- function(ids){
 	res <- gsub(paste0("(",REGEX_DEEP_SAMPLE_PREFIX,")","(_",REGEX_DEEP_SAMPLE_SUFFIX,")?"),"\\1",ids, perl=TRUE)
+	return(res)
+}
+#' getDeepSampleIdsFromString
+#' 
+#' looks for occurrences of DEEP IDs in a vector of strings and returns them as a list
+#' @param x string vector in which to look for DEEP Ids
+#' @return a list containing the found DEEP IDs for each element in the string vector
+#' @author Fabian Mueller
+#' @export 
+#' @examples 
+#' getDeepSampleIdsFromString(c("blubbsad43_Hm03_BlMa_TO1_WGBS_E_1XXX43_Hm05_BlMa_CtNOI43_Hm05_BlMa_Ct","43_Hm05_BlMa_Ct_NOMe_S_2uiadyf01_HepaRG_LiHR_D32","blubb"))
+getDeepSampleIdsFromString <- function(x){
+	m <- gregexpr(REGEX_DEEP_SAMPLE_PREFIX, x, perl=TRUE)
+	res <- regmatches(x, m)
 	return(res)
 }

@@ -13,7 +13,7 @@ deepSampleBaseIds(ids)
 a vector of sample ids as strings
 }
 \description{
-parses a vector of sample IDs and returns avector with the base ids (without assay, center and technical replicate fields). Returns the same string if it is not a valid ID.
+parses a vector of sample IDs and returns a vector with the base ids (without assay, center and technical replicate fields). Returns the same string if it is not a valid ID.
 }
 \examples{
 deepSampleBaseIds(c("43_Hm03_BlMa_TO1_WGBS_E_1","43_Hm05_BlMa_Ct","43_Hm05_BlMa_Ct_NOMe_S_2","01_HepaRG_LiHR_D32","41_Hf01_LiHe_Ct1_H3K4me1_F_1"))

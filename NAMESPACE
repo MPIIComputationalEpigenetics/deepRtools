@@ -3,5 +3,6 @@
 export(deepSampleBaseIds)
 export(deepSampleIds2dataFrame)
 export(getDataFrameFromTabFile)
+export(getDeepSampleIdsFromString)
 export(getExperimentMdFromFile)
 export(getSampleMdFromFile)
