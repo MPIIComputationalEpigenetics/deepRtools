@@ -70,7 +70,13 @@ deepSampleIds2dataFrame <- function(ids){
 			breplicate=NA,
 			assay=NA,
 			center=NA,
-			treplicate=NA
+			treplicate=NA,
+			subproject_short=NA,
+			organ_short=NA,
+			cellType_short=NA,
+			disease_short=NA,
+			assay_short=NA,
+			center_short=NA
 		)
 		if (!is.na(re)){
 			rem <- regexpr(re,x,perl=TRUE)
@@ -78,12 +84,16 @@ deepSampleIds2dataFrame <- function(ids){
 			
 			df[["validId"]] <- TRUE
 			df[["subproject"]] <- paste0("SP",paste(strsplit(parsed[1,"sp"],"")[[1]],collapse="."))
+			df[["subproject_short"]] <- parsed[1,"sp"]
 			df[["organism"]]   <- ifelse(parsed[1,"organism"]=="H","human",ifelse(parsed[1,"organism"]=="M","mouse",NA))
 			df[["sex"]]   <- ifelse(parsed[1,"sex"]=="m","male",ifelse(parsed[1,"sex"]=="f","female",NA))
 			if (nchar(parsed[1,"donor"])>0) df[["donor"]] <- parsed[1,"donor"]
 			df[["organ"]] <- DEEP_ORGANS[parsed[1,"organ"]]
+			df[["organ_short"]] <- parsed[1,"organ"]
 			df[["cellType"]] <- DEEP_CELL_TYPES[parsed[1,"celltype"]]
+			df[["cellType_short"]] <- parsed[1,"celltype"]
 			df[["disease"]] <- DEEP_DISEASES[parsed[1,"disease"]]
+			df[["disease_short"]] <- parsed[1,"disease"]
 			if (nchar(parsed[1,"breplicate"])>0) df[["breplicate"]] <- parsed[1,"breplicate"]
 
 			cln <- parsed[1,"cellline"]
@@ -95,7 +105,9 @@ deepSampleIds2dataFrame <- function(ids){
 		}
 		if (fullId){
 			df[["assay"]] <- DEEP_ASSAYS[parsed[1,"assay"]]
+			df[["assay_short"]] <- parsed[1,"assay"]
 			df[["center"]] <- DEEP_CENTERS[parsed[1,"center"]]
+			df[["center_short"]] <- parsed[1,"center"]
 			trep <- parsed[1,"treplicate"]
 			if (nchar(trep)>0) df[["treplicate"]] <- trep
 		}
