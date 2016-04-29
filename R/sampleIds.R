@@ -42,12 +42,13 @@ parse.one <- function(string,result){
 #' 
 #' parses a vector of sample IDs and returns avector with the corresponding fields
 #' @param ids a vector of sample ids as strings
+#' @param ignore.case flag indicating whether to ignore casing in parsing the sample ids
 #' @return A dataframe with columns corresponding to the fields that can be inferred from the names
 #' @author Fabian Mueller
 #' @export 
 #' @examples 
 #' deepSampleIds2dataFrame(c("43_Hm03_BlMa_TO1_WGBS_E_1", "43_Hm03_BlMa_TO1_WGBS","43_Hm05_BlMa_Ct","43_Hm05_BlMa_Ct_NOMe_S_2","01_HepaRG_LiHR_D32","41_Hf01_LiHe_Ct1_H3K4me1_F_1"))
-deepSampleIds2dataFrame <- function(ids){
+deepSampleIds2dataFrame <- function(ids, ignore.case=FALSE){
 	res <- do.call("rbind",lapply(ids,FUN=function(x){
 		re <- NA
 		fullId <- FALSE
@@ -79,7 +80,7 @@ deepSampleIds2dataFrame <- function(ids){
 			center_short=NA
 		)
 		if (!is.na(re)){
-			rem <- regexpr(re,x,perl=TRUE)
+			rem <- regexpr(re,x,perl=TRUE, ignore.case=ignore.case)
 			parsed <- parse.one(x,rem)
 			
 			df[["validId"]] <- TRUE
@@ -119,29 +120,31 @@ deepSampleIds2dataFrame <- function(ids){
 #' 
 #' parses a vector of sample IDs and returns a vector with the base ids (without assay, center and technical replicate fields). Returns the same string if it is not a valid ID.
 #' @param ids a vector of sample ids as strings
+#' @param ignore.case flag indicating whether to ignore casing in parsing the sample ids
 #' @return a vector of sample ids as strings
 #' @author Fabian Mueller
 #' @export 
 #' @examples 
 #' deepSampleBaseIds(c("43_Hm03_BlMa_TO1_WGBS_E_1","43_Hm05_BlMa_Ct","43_Hm05_BlMa_Ct_NOMe_S_2","01_HepaRG_LiHR_D32","41_Hf01_LiHe_Ct1_H3K4me1_F_1"))
-deepSampleBaseIds <- function(ids){
-	res <- gsub(paste0("(",REGEX_DEEP_SAMPLE_PREFIX,")","(_",REGEX_DEEP_SAMPLE_SUFFIX,")?"),"\\1",ids, perl=TRUE)
+deepSampleBaseIds <- function(ids, ignore.case=FALSE){
+	res <- gsub(paste0("(",REGEX_DEEP_SAMPLE_PREFIX,")","(_",REGEX_DEEP_SAMPLE_SUFFIX,")?"),"\\1",ids, perl=TRUE, ignore.case=ignore.case)
 	return(res)
 }
 #' getDeepSampleIdsFromString
 #' 
 #' looks for occurrences of DEEP IDs in a vector of strings and returns them as a list
 #' @param x string vector in which to look for DEEP Ids
+#' @param ignore.case flag indicating whether to ignore casing in parsing the sample ids
 #' @param fullId only retrieve full ids
 #' @return a list containing the found DEEP IDs for each element in the string vector
 #' @author Fabian Mueller
 #' @export 
 #' @examples 
 #' getDeepSampleIdsFromString(c("blubbsad43_Hm03_BlMa_TO1_WGBS_E_1XXX43_Hm05_BlMa_CtNOI43_Hm05_BlMa_Ct","43_Hm05_BlMa_Ct_NOMe_S_2uiadyf01_HepaRG_LiHR_D32","blubb"))
-getDeepSampleIdsFromString <- function(x, fullId=FALSE){
+getDeepSampleIdsFromString <- function(x, fullId=FALSE, ignore.case=FALSE){
 	pp <- REGEX_DEEP_SAMPLE_PREFIX
 	if (fullId) pp <- paste0(REGEX_DEEP_SAMPLE_PREFIX,"_",REGEX_DEEP_SAMPLE_SUFFIX)
-	m <- gregexpr(pp, x, perl=TRUE)
+	m <- gregexpr(pp, x, perl=TRUE, ignore.case=ignore.case)
 	res <- regmatches(x, m)
 	return(res)
 }

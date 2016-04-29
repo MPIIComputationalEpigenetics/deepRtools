@@ -4,11 +4,12 @@ Description: R tools for the German epigenome program DEEP (DEutsches Epigenom
     Programm)
 Author: Fabian Mueller
 Maintainer: Fabian Mueller <fmueller@mpi-inf.mpg.de>
-Date: 2015-06-25
+Date: 2016-04-29
 Suggests:
     GenomicRanges
 Depends:
     jsonlite,
     ggplot2
 License: GPL-2
-Version: 0.2
+Version: 0.3
+RoxygenNote: 5.0.1
