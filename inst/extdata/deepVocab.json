@@ -120,7 +120,7 @@
 			"H3K27me3": "ChIP sequencing (H3K27me3)",
 			"H3K27ac": "ChIP sequencing (H3K27ac)",
 			"H3K36me3": "ChIP sequencing (H3K36me3)",
-			"RRBS": "reduced representation bisulfite sequencing",
+			"RRBS": "reduced representation bisulfite sequencing"
 		},
 		"CENTER":{
 			"B": "Max Planck Institute for Molecular Genetics, Berlin",
