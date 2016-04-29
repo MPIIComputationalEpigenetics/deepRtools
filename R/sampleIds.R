@@ -52,8 +52,8 @@ deepSampleIds2dataFrame <- function(ids, ignore.case=FALSE){
 	res <- do.call("rbind",lapply(ids,FUN=function(x){
 		re <- NA
 		fullId <- FALSE
-		if (grepl(REGEX_DEEP_SAMPLE_ID,x,perl=TRUE)) re <- REGEX_DEEP_SAMPLE_ID
-		if (grepl(REGEX_DEEP_SAMPLE_ID_FULL,x,perl=TRUE)){
+		if (grepl(REGEX_DEEP_SAMPLE_ID,x,perl=TRUE,ignore.case=ignore.case)) re <- REGEX_DEEP_SAMPLE_ID
+		if (grepl(REGEX_DEEP_SAMPLE_ID_FULL,x,perl=TRUE,ignore.case=ignore.case)){
 			re <- REGEX_DEEP_SAMPLE_ID_FULL
 			fullId <- TRUE
 		}
