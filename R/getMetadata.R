@@ -45,6 +45,12 @@ saveReadTable <- function(fn, ...){
 			}
 		}
 	)
+	# remove newline and tab characters from strings
+	indsChar <- which(sapply(res, is.character))
+	for (i in indsChar){
+		res[[i]] <- gsub("\t", ";", res[[i]])
+		res[[i]] <- gsub("\n", ";", res[[i]])
+	}
 	return(res)
 }
 
