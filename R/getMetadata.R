@@ -13,14 +13,14 @@ saveReadTable <- function(fn, ...){
 		read.table(fn, ...),
 		error=function(err) {
 			if (grepl("^line.*did not have.*elements", err$message)){
-				num.elems <- as.numeric(gsub("^line.*did not have(.*)elements", "\\1", err$message)
+				num.elems <- as.numeric(gsub("^line.*did not have(.*)elements", "\\1", err$message))
 				if (sep=="\t"){
 					warning(paste0("Trying to repair tab/space separation (", fn, ") due to error in reading file: ", err$message))
 					lls <- readLines(fn)
 					# replace 4 or more whitespaces by tab
 					lls <- gsub(" {4,}", "\t", lls)
 					# collapse too many or too few tabs
-					lls.adj <- lapply(strsplit(lls, "\t"), FUN=function(x){
+					lls.adj <- unlist(lapply(strsplit(lls, "\t"), FUN=function(x){
 						if (length(x) == num.elems){
 							paste(x, collapse="\t")
 						} else if (length(x) > num.elems){
@@ -31,7 +31,7 @@ saveReadTable <- function(fn, ...){
 							# fewer tabs than expected --> append tabs
 							paste(c(x, rep("", num.elems-length(x))), collapse="\t")
 						}
-					})
+					}))
 
 					tmpFn <- tempfile()
 					writeLines(lls, tmpFn)
