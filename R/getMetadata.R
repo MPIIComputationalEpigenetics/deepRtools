@@ -20,7 +20,9 @@ saveReadTable <- function(fn, ...){
 					# replace 4 or more whitespaces by tab
 					lls <- gsub(" {4,}", "\t", lls)
 					# collapse too many or too few tabs
-					lls.adj <- unlist(lapply(strsplit(lls, "\t"), FUN=function(x){
+					lls.split <- strsplit(lls, "\t")
+					num.elems <- length(lls.split[[1]])
+					lls.adj <- unlist(lapply(lls.split, FUN=function(x){
 						if (length(x) == num.elems){
 							paste(x, collapse="\t")
 						} else if (length(x) > num.elems){
