@@ -1,3 +1,36 @@
+#' saveReadTable
+#' 
+#' save version of read.table, which can adjust for tabs that have been replaced by 4 or more spaces
+#' @param fn file name
+#' @param ... arguments passed on to read.table
+#' @return result of read.table(fn, ...), after possible error adjustment
+#' @author Fabian Mueller
+#' @noRd
+saveReadTable <- function(fn, ...){
+	dots <- list(...)
+	sep <- dots[["sep"]]
+	res <- tryCatch(
+		read.table(fn, ...),
+		error=function(err) {
+			if (grepl("^line.*did not have.*elements", err$message)){
+				if (sep=="\t"){
+					warning(paste0("Trying to repair tab/space separation (", fn, ") due to error in reading file: ", err$message))
+					lls <- readLines(fn)
+					lls <- gsub(" {4,}", "\t", lls)
+					tmpFn <- tempfile()
+					writeLines(lls, tmpFn)
+					read.table(tmpFn, ...)
+				} else {
+					stop(paste0("Error in reading table file (", fn, "): ", err$message))
+				}
+			} else {
+				stop(paste0("Error in reading table file (", fn, "): ", err$message))
+			}
+		}
+	)
+	return(res)
+}
+
 #' getDataFrameFromTabFile
 #' 
 #' given a two column, tab-separated file, extract relevant information as a data frame
@@ -6,7 +39,7 @@
 #' @author Fabian Mueller
 #' @export 
 getDataFrameFromTabFile <- function(fn){
-	tt <- read.table(fn, sep="\t", colClasses=rep("character",2), stringsAsFactors=FALSE, comment.char="")
+	tt <- saveReadTable(fn, sep="\t", colClasses=rep("character",2), stringsAsFactors=FALSE, comment.char="")
 	res <- data.frame(t(matrix(tt[,2])),stringsAsFactors=FALSE)
 	colnames(res) <- tt[,1]
 	return(res)
