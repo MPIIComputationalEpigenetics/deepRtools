@@ -35,7 +35,7 @@ saveReadTable <- function(fn, ...){
 					}))
 
 					tmpFn <- tempfile()
-					writeLines(lls, tmpFn)
+					writeLines(lls.adj, tmpFn)
 					read.table(tmpFn, ...)
 				} else {
 					stop(paste0("Error in reading table file (", fn, "): ", err$message))
