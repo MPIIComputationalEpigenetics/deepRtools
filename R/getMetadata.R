@@ -13,7 +13,6 @@ saveReadTable <- function(fn, ...){
 		read.table(fn, ...),
 		error=function(err) {
 			if (grepl("^line.*did not have.*elements", err$message)){
-				num.elems <- as.numeric(gsub("^line.*did not have(.*)elements", "\\1", err$message))
 				if (sep=="\t"){
 					warning(paste0("Trying to repair tab/space separation (", fn, ") due to error in reading file: ", err$message))
 					lls <- readLines(fn)
